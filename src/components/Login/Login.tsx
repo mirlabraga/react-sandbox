@@ -9,22 +9,14 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { Auth0Client, User } from "@auth0/auth0-spa-js";
+import { auth0 } from '../../libs/auth0';
 
 const theme = createTheme();
-
-const auth0 = new Auth0Client({
-  domain: 'dev-q7rj5o44.us.auth0.com',
-  client_id: 'PH0OBJ2fYk1bc3akSovlIe03jwoi0bqa',
-  scope: 'openid profile email',
-  cacheLocation: 'localstorage',
-})
 
 export default function Login() {
 
   const handleSubmit = async () => {
-    await auth0.loginWithRedirect({
-      redirect_uri: 'http://localhost:3000/callback'
-    });
+    await auth0.loginWithRedirect();
   }
 
   return (
