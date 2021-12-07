@@ -15,7 +15,7 @@ export default function Auth0Callback() {
     const checkCallback = async () => {
       try {
         await auth0.handleRedirectCallback(); //Valid callback and fetch token
-        navigate('/home')
+        navigate('/home') // If not exception it's redirect to home
       } catch(err) {
         console.error(err);
         setError(`some error: ${err}`);

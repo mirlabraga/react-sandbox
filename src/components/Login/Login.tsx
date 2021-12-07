@@ -8,7 +8,6 @@ import Grid from '@mui/material/Grid';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { Auth0Client, User } from "@auth0/auth0-spa-js";
 import { auth0 } from '../../libs/auth0';
 
 const theme = createTheme();
