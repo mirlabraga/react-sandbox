@@ -1,4 +1,3 @@
-import * as React from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -9,6 +8,8 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { auth0 } from '../../libs/auth0';
+import TextField from '@mui/material/TextField';
+import { Cognito } from '../../libs/Cognito';
 
 const theme = createTheme();
 
@@ -18,6 +19,10 @@ export default function Login() {
     await auth0.loginWithRedirect();
   }
 
+  const handleSubmitCognito = async () => {
+    new Cognito().signInWithEmail("mirla", "mirla123456");
+  }
+  
   return (
     <ThemeProvider theme={theme}>
       <Grid container component="main" sx={{ height: '100vh' }}>
@@ -30,7 +35,7 @@ export default function Login() {
           sx={{
             backgroundImage: 'url(https://source.unsplash.com/random)',
             backgroundRepeat: 'no-repeat',
-            backgroundColor: (t) =>
+            backgroundColor: (t: any) =>
               t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900],
             backgroundSize: 'cover',
             backgroundPosition: 'center',
@@ -52,6 +57,42 @@ export default function Login() {
             <Typography component="h1" variant="h5">
               Sample: React + Cognito
             </Typography>
+
+            <Box sx={{ mt: 1 }}>
+
+              <Box width="80%" m={1}>
+
+                <TextField
+                  fullWidth
+                  variant="outlined"
+                  onChange={(evt: any) => {
+                    new Cognito().signInWithEmail("mirla", "mirla123456");
+                  }}
+                />
+
+              </Box>
+              <Box width="80%" m={1}>
+                <TextField
+                  fullWidth
+                  variant="outlined"
+                  onChange={(evt: any) => {
+                    //setEmail(evt.target.value)
+                  }}
+                />
+              </Box>
+
+              <Button
+                fullWidth
+                variant="contained"
+                sx={{ mt: 3, mb: 2 }}
+                onClick={(evt: any) => {
+                    new Cognito().signInWithEmail("mirla", "mirla123456");
+                  }}
+              >
+                Sign In Cognito
+              </Button>
+
+            </Box>
             <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
               <Button
                 type="submit"
@@ -59,7 +100,7 @@ export default function Login() {
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
               >
-                Sign In
+                Sign In OAuth0
               </Button>
             </Box>
           </Box>
