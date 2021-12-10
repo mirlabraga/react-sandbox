@@ -2,8 +2,8 @@ import { AuthenticationDetails, CognitoUser, CognitoUserAttribute, CognitoUserPo
 
 import { IdentityProvider } from "./IdentityProvider";
 
-const userPoolId = 'eu-west-2_LbRx1DlcT' || process.env.REACT_APP_USERPOOL_ID
-const clientId = '1r79ds96morkrb6jj0f7lk3fn3' || process.env.REACT_APP_CLIENT_ID
+const userPoolId = 'eu-west-2_9ks5dtt0O' || process.env.REACT_APP_USERPOOL_ID
+const clientId = '71etn9p4u3kt8kg9u87d4ejn5i' || process.env.REACT_APP_CLIENT_ID
 
 const poolData = {
   UserPoolId: `${userPoolId}`,
@@ -21,7 +21,7 @@ export class Cognito implements IdentityProvider {
       return new Promise(function (resolve, reject) {
         const authenticationData = {
           Username: "mirla",
-          Password: "mirla123456",
+          Password: "Mirla123456",
         };
         const authenticationDetails = new AuthenticationDetails(authenticationData);
 
