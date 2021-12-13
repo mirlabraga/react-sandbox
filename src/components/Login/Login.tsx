@@ -1,3 +1,4 @@
+import React, { useEffect, useState } from "react";
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -7,20 +8,19 @@ import Grid from '@mui/material/Grid';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { auth0 } from '../../libs/auth0';
 import TextField from '@mui/material/TextField';
-import { Cognito } from '../../libs/Cognito';
+import { signInWithUserAndPassword } from '../../libs/Cognito';
+import { auth0 } from '../../libs/auth0';
+import { IUser } from "./IUser";
 
 const theme = createTheme();
 
 export default function Login() {
 
+  const [user, setUser] = useState<IUser>({username: '', password: ''});
+
   const handleSubmit = async () => {
     await auth0.loginWithRedirect();
-  }
-
-  const handleSubmitCognito = async () => {
-    new Cognito().signInWithEmail("mirla", "mirla123456");
   }
   
   return (
@@ -61,22 +61,27 @@ export default function Login() {
             <Box sx={{ mt: 1 }}>
 
               <Box width="80%" m={1}>
-
                 <TextField
                   fullWidth
                   variant="outlined"
                   onChange={(evt: any) => {
-                    new Cognito().signInWithEmail("mirla", "mirla123456");
+                    if (evt && evt.currentTarget) {
+                      const newUser = { ...user, username: evt.currentTarget.value };
+                      setUser(newUser);
+                    }
                   }}
                 />
-
               </Box>
+
               <Box width="80%" m={1}>
                 <TextField
                   fullWidth
                   variant="outlined"
                   onChange={(evt: any) => {
-                    //setEmail(evt.target.value)
+                    if (evt && evt.currentTarget) {
+                      const newUser = { ...user, password: evt.currentTarget.value };
+                      setUser(newUser);
+                    }
                   }}
                 />
               </Box>
@@ -86,8 +91,8 @@ export default function Login() {
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
                 onClick={(evt: any) => {
-                    new Cognito().signInWithEmail("mirla", "mirla123456");
-                  }}
+                  signInWithUserAndPassword(user.username, user.password);
+                }}
               >
                 Sign In Cognito
               </Button>

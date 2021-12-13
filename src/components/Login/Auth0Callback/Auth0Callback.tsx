@@ -1,11 +1,9 @@
 
 import React, { useEffect, useState } from "react";
-import { Auth0Client, User } from "@auth0/auth0-spa-js";
 import {
   useNavigate,
   } from "react-router-dom";
 import { auth0 } from "../../../libs/auth0";
-
 
 export default function Auth0Callback() {
 
