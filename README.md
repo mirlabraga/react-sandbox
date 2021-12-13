@@ -9,6 +9,14 @@ $ cd react-sandbox
 $ npm install
 ```
 
+# Valids username and password
+
+| username   | password   |  
+| -----------| -----------|
+|  mirla | Mirla123456  |  
+|  anik  | Anik123456   |  
+
+
 # Libraries
 
 1 - for creating new structure component and storybook
