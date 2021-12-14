@@ -12,17 +12,26 @@ import TextField from '@mui/material/TextField';
 import { signInWithUserAndPassword } from '../../libs/Cognito';
 import { auth0 } from '../../libs/auth0';
 import { IUser } from "./IUser";
+import { useNavigate } from "react-router-dom";
 
 const theme = createTheme();
 
 export default function Login() {
 
-  const [user, setUser] = useState<IUser>({username: '', password: ''});
+  const [user, setUser] = useState<IUser>({ username: '', password: '' });
+  let navigate = useNavigate();
 
   const handleSubmit = async () => {
     await auth0.loginWithRedirect();
   }
-  
+
+  const handleSign = async () => {
+    const sign = await signInWithUserAndPassword(user.username, user.password);
+    if (sign) {
+      navigate('/home')
+    }
+  }
+
   return (
     <ThemeProvider theme={theme}>
       <Grid container component="main" sx={{ height: '100vh' }}>
@@ -77,6 +86,8 @@ export default function Login() {
                 <TextField
                   fullWidth
                   variant="outlined"
+                  type="password"
+                  autoComplete="current-password"
                   onChange={(evt: any) => {
                     if (evt && evt.currentTarget) {
                       const newUser = { ...user, password: evt.currentTarget.value };
@@ -91,7 +102,7 @@ export default function Login() {
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
                 onClick={(evt: any) => {
-                  signInWithUserAndPassword(user.username, user.password);
+                  handleSign(); 
                 }}
               >
                 Sign In Cognito

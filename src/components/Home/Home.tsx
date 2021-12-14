@@ -29,7 +29,7 @@ const Home = () => {
 
   return (
     <div className={styles.Home} data-testid="Home">
-      Home Component<br />
+      Home Component - Welcome!<br />
       <button onClick={fetchCats}>fetch cats</button><br />
       {cats.map(cat => <>{cat.name}<br/></>)}
       <button id="logout" onClick={logout}>Logout</button>
